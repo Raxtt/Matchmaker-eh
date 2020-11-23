@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang='en'>
+<!--
+    Author: Evan Hartke
+    Project: Matchmaker
+
+    
+-->
+<head>
+    <meta charset='UTF-8'>
+    <title>Matchmaker</title>
+</head>
+
+<body>
+    <h1>Matchmaker</h1>
+    <p>Answer the following questions to see if we are compatible with me<br/>
+        There will be statements that you have to rate with: <br/>
+        Strongly Agree <br/>
+        Agree <br/>
+        Neither Agree nor Disagree <br/>
+        Disagree <br/>
+        or Strongly Disagree <br/>
+                    </p>
+
+    <label>Bowling is the best sport</label>
+    <br/>
+    <select id='q1'>
+        <option value='5'>Strongly Agree</option>
+        <option value='4'>Agree</option>
+        <option value='3'>Neither agree nor disagree</option>
+        <option value='2'>Disagree</option>
+        <option value='1'>Strongly Disagree</option>
+    </select>
+
+    <br/><br/>
+    <label>You would rather party than stay home</label>
+    <br/>
+    <select id='q2'>
+        <option value='5'>Strongly Agree</option>
+        <option value='4'>Agree</option>
+        <option value='3'>Neither agree nor disagree</option>
+        <option value='2'>Disagree</option>
+        <option value='1'>Strongly Disagree</option>
+    </select>
+
+    <br/><br/>
+    <label>Building computers is really fun</label>
+    <br/>
+    <select id='q3'>
+        <option value='5'>Strongly Agree</option>
+        <option value='4'>Agree</option>
+        <option value='3'>Neither agree nor disagree</option>
+        <option value='2'>Disagree</option>
+        <option value='1'>Strongly Disagree</option>
+    </select>
+
+    <br/><br/>
+    <label>Sushi is really good</label>
+    <br/>
+    <select id='q4'>
+        <option value='5'>Strongly Agree</option>
+        <option value='4'>Agree</option>
+        <option value='3'>Neither agree nor disagree</option>
+        <option value='2'>Disagree</option>
+        <option value='1'>Strongly Disagree</option>
+    </select>
+
+    <br/><br/>
+    <label>Alt Rock is the best music genre</label>
+    <br/>
+    <select id='q5'>
+        <option value='5'>Strongly Agree</option>
+        <option value='4'>Agree</option>
+        <option value='3'>Neither agree nor disagree</option>
+        <option value='2'>Disagree</option>
+        <option value='1'>Strongly Disagree</option>
+    </select>
+
+    
+
+    <br/><br/><br/>
+    <button onclick='calculateCompatibility()'>Calculate Compatibility</button>
+    <p id='Compatibility'></p>
+
+<script>
+console.log('Starting Matchmaker')
+
+function calculateCompatibility() {
+    console.log('CalculateCompatibility()');
+
+    const DESIRED_RESPONSE = [
+        5, 
+        1,
+        5,
+        2,
+        4,
+
+    ];
+
+    const MAX_SCORE = 17
+
+   let question1Response = document.getElementById('q1').selectedOptions[0].value;
+   let question2Response = document.getElementById('q2').selectedOptions[0].value;
+   let question3Response = document.getElementById('q3').selectedOptions[0].value;
+   let question4Response = document.getElementById('q4').selectedOptions[0].value;
+   let question5Response = document.getElementById('q5').selectedOptions[0].value;
+
+    // test to make sure it works
+    console.log('Question 1 Answers:');
+    console.log(document.getElementById('q1').selectedOptions[0].text);
+    console.log(document.getElementById('q1').selectedOptions[0].value);
+    console.log(question1Response);
+
+    // individual ? scores
+    let question1Compatibilty = 5 - Math.abs(question1Response - DESIRED_RESPONSE[0]);
+    let question2Compatibilty = 1 - Math.abs(question2Response - DESIRED_RESPONSE[1]);
+    let question3Compatibilty = 5 - Math.abs(question3Response - DESIRED_RESPONSE[2]);
+    let question4Compatibilty = 2 - Math.abs(question4Response - DESIRED_RESPONSE[3]);
+    let question5Compatibilty = 4 - Math.abs(question5Response - DESIRED_RESPONSE[4]);
+
+    console.log(question1Compatibilty);
+    console.log(question2Compatibilty);
+    console.log(question3Compatibilty);
+    console.log(question4Compatibilty);
+    console.log(question5Compatibilty);
+
+    // total 
+    let totalCompatibilty = question1Compatibilty + question2Compatibilty + question3Compatibilty + question4Compatibilty + question5Compatibilty;
+
+    totalCompatibilty *= 100 / MAX_SCORE;
+    totalCompatibilty = Math.round(totalCompatibilty);
+    console.log('tc='+ totalCompatibilty);
+
+    document.getElementById('Compatibility').innerHTML = 'Your compatiblity is ' + totalCompatibilty + '%';
+}
+</script>
+
+</body>
+
+
+</html>
